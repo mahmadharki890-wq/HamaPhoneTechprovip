@@ -3,172 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAMA TECH VIP PRO</title>
+    <title>Hama Tech VIP Pro</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Orbitron:wght@600&display=swap');
         
         :root {
-            --gold: #FFD700;
-            --dark-gold: #B8860B;
-            --bg: #080808;
-            --card-bg: #151515;
-            --glass: rgba(255, 215, 0, 0.1);
+            --gold: #D4AF37;
+            --led-blue: #00f2ff;
+            --bg: #050505;
         }
 
         body {
             background-color: var(--bg);
-            color: #fff;
+            color: #e0e0e0;
             font-family: 'Noto Sans Arabic', sans-serif;
             margin: 0;
-            padding-bottom: 50px;
-            overflow-x: hidden;
+            padding-bottom: 20px;
         }
 
-        /* بەشی سەرەوە - بازنەی جوڵاو */
-        .header-area {
-            height: 150px;
-            position: relative;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #080808 100%);
-            border-bottom: 1px solid var(--gold);
-            overflow: hidden;
-        }
-
-        .moving-circle {
-            width: 110px;
-            height: 110px;
-            background: rgba(255, 215, 0, 0.05);
+        /* لۆگۆ و ناوی حەمە هەرکی بە LED */
+        .brand-header {
+            margin: 20px auto;
+            width: 90%;
+            padding: 30px 15px;
             border: 2px solid var(--gold);
-            border-radius: 50%;
-            position: absolute;
-            top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-            backdrop-filter: blur(5px);
-            animation: slideOrbit 10s ease-in-out infinite alternate;
-        }
-
-        @keyframes slideOrbit {
-            from { left: 5%; transform: rotate(0deg); }
-            to { left: 70%; transform: rotate(360deg); }
-        }
-
-        .moving-circle span {
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 16px;
-            text-shadow: 0 0 10px #000;
+            border-radius: 15px;
+            background: #000;
             text-align: center;
-            line-height: 1.2;
-        }
-
-        /* خشتەی بەشەکان */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .service-box {
-            background: var(--card-bg);
-            border: 1px solid #333;
-            height: 160px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: 0.4s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
-        .service-box::before {
+        /* لیدە جوڵاوەکەی دەوری ناوەکە */
+        .brand-header::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transition: 0.4s;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotateLED 4s linear infinite;
+            z-index: 1;
         }
 
-        .service-box:active {
-            border-color: var(--gold);
-            background: #1a1a1a;
-            transform: translateY(-5px);
+        .brand-header-content {
+            position: relative;
+            z-index: 2;
+            background: #000;
+            margin: -28px -13px;
+            padding: 28px 13px;
+            border-radius: 13px;
         }
 
-        .service-box:active::before {
-            transform: scaleX(1);
+        @keyframes rotateLED {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* ئیمۆجییە جوڵاوەکان */
-        .emoji-icon {
-            font-size: 45px;
-            margin-bottom: 15px;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
+        .brand-ku { font-size: 32px; color: #fff; font-weight: bold; text-shadow: 0 0 10px var(--gold); }
+
+        /* خشتەی بەشەکان بە شێوەی چوارگۆشەی ڕێک */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 15px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.1); }
+        .service-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .service-box h3 {
-            font-size: 14px;
-            color: #ddd;
+        /* لیدی لای لایەکان لە کاتی دەست لێدان */
+        .service-card:active {
+            border-color: var(--led-blue);
+            box-shadow: 0 0 15px var(--led-blue);
+        }
+
+        .service-card img {
+            width: 45px;
+            margin-bottom: 12px;
+        }
+
+        .service-card h3 {
+            font-size: 13px;
+            color: var(--gold);
             margin: 0;
-            font-weight: 500;
+            font-weight: bold;
         }
 
-        /* دیزاینی ناو مۆدێڵ */
+        /* مۆدێڵ و بەشی کلیل */
         .modal {
             display: none;
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            padding: 30px;
-            backdrop-filter: blur(15px);
+            z-index: 9999;
+            padding: 20px;
         }
 
         .modal-content {
-            max-width: 450px;
+            max-width: 500px;
             margin: auto;
-            border: 1px solid var(--gold);
-            padding: 25px;
             background: #111;
+            padding: 25px;
+            border: 1px solid var(--gold);
+            border-radius: 15px;
         }
 
-        .price-display {
-            font-size: 35px;
-            color: var(--gold);
-            text-align: center;
-            margin: 20px 0;
-            font-family: 'Orbitron', sans-serif;
-        }
+        .price-tag { font-size: 30px; text-align: center; margin: 20px 0; color: #fff; font-weight: bold; }
 
         .vip-input {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: #000;
-            border: 1px solid #444;
+            border: 1px solid #333;
             color: var(--gold);
             font-size: 20px;
             text-align: center;
             margin-bottom: 15px;
+            border-radius: 10px;
         }
 
-        .vip-btn {
+        .btn-apply {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background: var(--gold);
             color: #000;
-            border: none;
             font-weight: bold;
             font-size: 18px;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
         }
 
@@ -177,42 +150,38 @@
             position: fixed;
             inset: 0;
             background: #000;
-            z-index: 2000;
+            z-index: 10000;
             padding: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="header-area">
-    <div class="moving-circle" id="admin-trigger">
-        <span>حەمە<br>هەرکی</span>
+    <div class="brand-header" id="admin-trigger">
+        <div class="brand-header-content">
+            <div class="brand-ku">حەمە هەرکی</div>
+        </div>
     </div>
-</div>
 
-<div class="grid-container" id="main-grid">
-    </div>
+    <div class="services-grid" id="main-grid"></div>
 
 <div id="modal" class="modal">
     <div class="modal-content">
         <h2 id="m-title" style="color:var(--gold); text-align:center;"></h2>
-        <div style="background:#222; padding:15px; border-right:4px solid var(--gold); margin-bottom:15px;">
-            <p id="m-desc" style="font-size:14px; margin:0;"></p>
-        </div>
-        <div class="price-display" id="m-price"></div>
-        <input type="text" class="vip-input" id="key-field" placeholder="ENTER VIP KEY">
-        <button class="vip-btn" onclick="apply()">چالاککردن و ناردن</button>
+        <div class="price-tag" id="m-price"></div>
+        <input type="text" class="vip-input" id="key-field" placeholder="کلیل لێرە بنووسە">
+        <button class="btn-apply" onclick="apply()">چالاککردن و ناردن</button>
         <button onclick="closeS()" style="width:100%; background:none; color:#777; border:none; margin-top:15px;">داخستن</button>
-        <div id="status" style="text-align:center; margin-top:15px;"></div>
+        <div id="status" style="text-align:center; margin-top:10px;"></div>
     </div>
 </div>
 
 <div id="admin-panel">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h2 style="color:var(--gold);">VIP KEYS LIST</h2>
-        <button onclick="document.getElementById('admin-panel').style.display='none'" style="color:red; background:none; border:none; font-size:25px;">×</button>
+        <h2 style="color:var(--gold);">VIP KEYS</h2>
+        <button onclick="document.getElementById('admin-panel').style.display='none'" style="color:red; background:none; border:none; font-size:30px;">×</button>
     </div>
-    <div id="admin-data" style="height:80vh; overflow-y:auto; color:#0f0; font-family:monospace; font-size:12px; border:1px solid #222; padding:10px;"></div>
+    <div id="admin-data" style="height:80vh; overflow-y:auto; color:#0f0; border:1px solid #222; padding:10px; font-family:monospace;"></div>
 </div>
 
 <script>
@@ -220,42 +189,41 @@
     for(let i=1; i<=300; i++) keys.push(`HAMA-VIP-${Math.random().toString(36).substr(2,5).toUpperCase()}-${i}`);
 
     const services = [
-        { t: "سناپچات پڵەس", e: "✨", p: 15000, d: "چالاککردنی فەرمی یەک ساڵ بەبێ پاسۆرد." },
-        { t: "تیکتۆک فێکس", e: "🎬", p: 45000, d: "هێنانەوەی ئەکاونتی تیکتۆک کە باند کراوە." },
-        { t: "سناپچات SS06", e: "📱", p: 50000, d: "لادانی باندی ئامێر بۆ سناپچات." },
-        { t: "ئایفۆن Bypass", e: "🔓", p: 75000, d: "تێپەڕاندنی ئایکلۆد بە شەبەکەوە." },
-        { t: "هێنانەوەی وێنە", e: "🖼️", p: 40000, d: "گەڕاندنەوەی داتای سڕاوەی ناو مۆبایل." },
-        { t: "پاراستنی مۆبایل", e: "🛡️", p: 25000, d: "پاککردنەوەی مۆبایل لە هاک و جاسوس." },
-        { t: "فەیسبووک Recovery", e: "👤", p: 35000, d: "هێنانەوەی پەیج و ئەکاونتی هاککراو." },
-        { t: "ئینستاگرام باند", e: "📸", p: 45000, d: "کردنەوەی باندی ئینستاگرام بە گەرەنتی." },
-        { t: "ڕیپۆرت سیستم", e: "🚫", p: 20000, d: "داخستنی ئەکاونتی ساختە و بێزارکەر." },
-        { t: "کێشەی سۆفتوێر", e: "⚙️", p: 15000, d: "چاککردنی هەموو کێشەیەکی سیستەم." },
-        { t: "شکاندنی پاسۆرد", e: "🔑", p: 30000, d: "لادانی کۆدی شاشە بەبێ سڕینەوەی داتا." },
-        { t: "کڕینی دۆلار", e: "💵", p: 5000, d: "بارکردنی دۆلار بۆ یاری و بەرنامەکان." },
-        { t: "سۆشیاڵ میدیا", e: "🚀", p: 10000, d: "زیادکردنی فۆڵۆوەر و لایکی حەقیقی." },
-        { t: "دۆزینەوەی مۆبایل", e: "🔍", p: 60000, d: "بەدواداچوونی مۆبایلی ونبوو بە IMEI." },
-        { t: "هاککردنی یاری", e: "🎮", p: 20000, d: "دابینکردنی فایلی هاک بۆ یارییەکان." },
-        { t: "کێشەی تۆڕ", e: "📶", p: 25000, d: "چارەسەری نەنوسینی سیمکارت و سیگناڵ." },
-        { t: "سێرڤەری VIP", e: "⚡", p: 10000, d: "پێدانی سێرڤەری تایبەت بۆ پینگ." },
-        { t: "ئەندرۆید Root", e: "🤖", p: 20000, d: "ڕووتکردنی ئەندرۆید بە بێ کێشە." },
-        { t: "دروستکردنی ئەکاونت", e: "✉️", p: 15000, d: "ئەکاونتی ئەمریکی بۆ قازانج." },
-        { t: "کۆد شکاندن", e: "🧱", p: 40000, d: "شکاندنی فایلی زایپ و وێنەی قفڵکراو." }
+        { t: "سناپچات پڵەس", i: "snapchat", p: 15000 },
+        { t: "تیکتۆک فێکس", i: "tiktok", p: 45000 },
+        { t: "سناپچات SS06", i: "snapchat", p: 50000 },
+        { t: "ئایفۆن Bypass", i: "iphone", p: 75000 },
+        { t: "هێنانەوەی وێنە", i: "camera", p: 40000 },
+        { t: "پاراستنی مۆبایل", i: "shield", p: 25000 },
+        { t: "فەیسبووک Recovery", i: "facebook-new", p: 35000 },
+        { t: "ئینستاگرام باند", i: "instagram-new", p: 45000 },
+        { t: "ڕیپۆرت سیستم", i: "cancel", p: 20000 },
+        { t: "کێشەی سۆفتوێر", i: "cd", p: 15000 },
+        { t: "شکاندنی پاسۆرد", i: "lock", p: 30000 },
+        { t: "کڕینی دۆلار", i: "money-bag", p: 5000 },
+        { t: "سۆشیاڵ میدیا", i: "globe", p: 10000 },
+        { t: "دۆزینەوەی مۆبایل", i: "marker", p: 60000 },
+        { t: "هاککردنی یاری", i: "controller", p: 20000 },
+        { t: "کێشەی تۆڕ", i: "sim-card", p: 25000 },
+        { t: "سێرڤەری VIP", i: "rocket", p: 10000 },
+        { t: "ئەندرۆید Root", i: "android", p: 20000 },
+        { t: "دروستکردنی ئەکاونت", i: "external-link", p: 15000 },
+        { t: "کۆد شکاندن", i: "pin-pad", p: 40000 }
     ];
 
     function render() {
         const grid = document.getElementById('main-grid');
         services.forEach(s => {
             grid.innerHTML += `
-                <div class="service-box" onclick="openS('${s.t}', '${s.d}', ${s.p})">
-                    <span class="emoji-icon">${s.e}</span>
+                <div class="service-card" onclick="openS('${s.t}', ${s.p})">
+                    <img src="https://img.icons8.com/color/144/${s.i}.png">
                     <h3>${s.t}</h3>
                 </div>`;
         });
     }
 
-    function openS(t, d, p) {
+    function openS(t, p) {
         document.getElementById('m-title').innerText = t;
-        document.getElementById('m-desc').innerText = d;
         document.getElementById('m-price').innerText = p.toLocaleString() + " IQD";
         document.getElementById('modal').style.display = 'block';
     }
@@ -265,18 +233,16 @@
     function apply() {
         const val = document.getElementById('key-field').value.trim();
         const stat = document.getElementById('status');
-        const sName = document.getElementById('m-title').innerText;
         if(keys.includes(val)) {
-            stat.innerHTML = "<b style='color:#0f0'>✅ کلیلەکە ڕاستە!</b>";
+            stat.innerHTML = "<b style='color:#0f0'>✅ ڕاستە، چاوەڕوان بە...</b>";
             setTimeout(() => {
-                window.location.href = `https://wa.me/9647509395657?text=سڵاو کاک حەمە، کلیلەکەم بەکارهێنا:%0Aخزمەتگوزاری: ${sName}%0Aکلیل: ${val}`;
+                window.location.href = `https://wa.me/9647509395657?text=سڵاو، کلیلەکەم: ${val}`;
             }, 1500);
         } else {
-            stat.innerHTML = "<b style='color:red'>❌ کلیلەکە هەڵەیە!</b>";
+            stat.innerHTML = "<b style='color:red'>❌ هەڵەیە!</b>";
         }
     }
 
-    // ئەدمین
     const trigger = document.getElementById('admin-trigger');
     let timer;
     trigger.addEventListener('touchstart', () => timer = setTimeout(showAdmin, 3000));
@@ -286,12 +252,11 @@
         if(prompt("PASSWORD:") === "Xapokam10#") {
             const list = document.getElementById('admin-data');
             list.innerHTML = "";
-            keys.forEach((k, idx) => list.innerHTML += `<div>${idx+1}. ${k} - READY</div>`);
+            keys.forEach((k, idx) => list.innerHTML += `<div>${idx+1}. ${k}</div>`);
             document.getElementById('admin-panel').style.display = 'block';
         }
     }
     render();
 </script>
-
 </body>
 </html>
