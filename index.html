@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAMA HERKI VIP 50 SECTIONS</title>
+    <title>HAMA HERKI VIP - FIXED</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@700&display=swap');
         
@@ -18,7 +18,7 @@
         }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* لیدی ڕەنگاوڕەنگ بۆ ٥٠ بەشەکە */
+        /* لیدی ڕەنگاوڕەنگ بۆ بەشەکان */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
         .card {
             background: #0a0a0a; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; position: relative; z-index: 1; border: 2px solid transparent; overflow: hidden;
@@ -48,6 +48,8 @@
         .btn { width: 100%; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
         .btn-unlock { background: #ff0000; color: #fff; box-shadow: 0 0 15px #ff0000; }
         .btn-wa { background: #25D366; color: #fff; text-decoration: none; display: block; margin-top: 15px; }
+        
+        .refund-badge { background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; color: #ff0000; padding: 10px; border-radius: 10px; font-size: 12px; margin-top: 10px; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -66,17 +68,28 @@
         </div>
         
         <div id="lock-zone" class="lock-box">
-            <p style="font-size: 12px; color: #aaa;">🔑 بۆ بینینی نرخ و وردەکاری تەواو کلیل لێ بدە</p>
+            <p style="font-size: 12px; color: #aaa;">🔑 تکایە کلیلەکەت لێ بدە بۆ بینینی وردەکاری</p>
             <input type="text" id="key-field" placeholder="HAMA-XXX">
-            <button class="btn btn-unlock" onclick="checkKey()">ئۆپن کردنی هەموو بەشەکان</button>
+            <button class="btn btn-unlock" onclick="checkKey()">جوونە ناو بەشەکە</button>
+            <p style="font-size: 10px; color: #555; margin-top: 10px;">ئەگەر کلیلەکەت نییە، پەیوەندی بە ئەدمین بکە بۆ کڕین</p>
         </div>
 
         <div id="vip-zone" class="secret-info">
-            <p style="color:#0f0; font-weight: bold;">✅ بە سەرکەوتوویی کرایەوە</p>
-            <p style="text-align: right;"><b>📄 وردەکاری کامل:</b> <br><span id="m-full" style="color:#ccc;"></span></p>
-            <p style="text-align: right;"><b>⏱ کات:</b> <span id="m-time" style="color:#fffb00;"></span></p>
-            <div id="m-price" style="font-size: 28px; color:#ff0000; font-weight: bold; margin: 15px 0;"></div>
-            <a href="#" id="wa-link" class="btn btn-wa">داواکردن لە واتسئەپ</a>
+            <div style="background: rgba(0,255,0,0.1); padding: 10px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #0f0;">
+                <p style="color:#0f0; font-weight: bold; margin: 0;">✅ هەموو زانیارییەکان ئۆپن بوون</p>
+            </div>
+            
+            <p style="text-align: right;"><b>📖 وردەکاری کامل:</b> <br><span id="m-full" style="color:#ccc;"></span></p>
+            <p style="text-align: right;"><b>⏱ کاتی پێویست:</b> <span id="m-time" style="color:#fffb00;"></span></p>
+            
+            <div class="refund-badge">
+                ⚠️ **ڕێژەی گەڕانەوەی پارە:** <br>
+                ئەگەر لە ماوەی ١ تا ٧ ڕۆژ ئیشەکە نەکرا، **٪١٠٠**ی پارەکەت بۆ دەگەڕێتەوە و تەنها **٪٢** وەک خزمەتگوزاری دەبڕدرێت.
+            </div>
+
+            <div id="m-price" style="font-size: 30px; color:#ff0000; font-weight: bold; margin: 15px 0;"></div>
+            
+            <a href="#" id="wa-link" class="btn btn-wa">ناردنی داواکاری بۆ واتسئەپ</a>
         </div>
         
         <button onclick="closeModal()" style="margin-top:20px; background:none; border:none; color:#444; cursor:pointer;">✕ گەڕانەوە</button>
@@ -84,40 +97,51 @@
 </div>
 
 <script>
-    // دروستکردنی ١٠٠٠ کلیل
+    // ١٠٠٠ کلیل
     const validKeys = Array.from({length: 1000}, (_, i) => `HAMA-${i + 1}`);
 
-    // لیستی ٥٠ بەشەکە (بۆ ئەوەی کۆدەکە درێژ نەبێت لێرە دانەم ناوە، تەنها شوێنەکەم بۆ داناوی)
-    const data = [];
-    const titles = ["سناپچات پڵەس", "تیکتۆک فێکس", "سناپ SS06", "ئایفۆن Bypass", "هێنانەوەی وێنە", "فەیسبووک Recovery", "ئینستا باند", "سۆفتوێر", "ڕیپۆرت", "پاسۆرد", "دۆلار", "فۆڵۆوەر", "دۆزینەوەی مۆبایل", "هاک", "تۆڕ", "سێرڤەر", "ڕووت", "ئەکاونت", "کۆد شکاندن", "پاراستن"];
-    
-    // دروستکردنی ٥٠ بەش بە شێوەی ئۆتۆماتیکی (دەتوانی خۆت ناوەکانیان بگۆڕیت)
-    for(let i=1; i<=50; i++) {
-        let name = titles[i-1] || `خزمەتگوزاری ${i}`;
-        data.push({
-            t: name,
-            i: i % 2 === 0 ? "snapchat" : "iphone",
-            s: "زانیاری سەرەتایی دەربارەی ئەم بەشە...",
-            f: "ئەمە وردەکاری کامل و نهێنییە کە تەنها دوای کلیلەکە دەردەکەوێت.",
-            p: `${i * 5},000 IQD`,
-            tm: "١-٣ ڕۆژ"
+    // داتاکان
+    const services = [
+        { t: "سناپچات پڵەس", i: "snapchat", s: "بۆ ماوەی یەک ساڵ.", f: "چالاککردنی فەرمی بەبێ پاسۆرد، گەرەنتی نەمانی باند.", p: "15,000 IQD", tm: "1 کاتژمێر" },
+        { t: "تیکتۆک فێکس", i: "tiktok", s: "هێنانەوەی تیکتۆکی باندکراو.", f: "هێنانەوەی ئەکاونتە باندکراوەکان لە ڕێگەی سێرڤەری تایبەت.", p: "45,000 IQD", tm: "1-7 ڕۆژ" },
+        { t: "سناپچات SS06", i: "snapchat", s: "لادانی باندی ئامێر.", f: "چارەسەری باندی ئامێر (Device Ban) بە فەرمی.", p: "50,000 IQD", tm: "1-3 ڕۆژ" },
+        { t: "ئایفۆن Bypass", i: "iphone", s: "کردنەوەی ئایکلۆد.", f: "تێپەڕاندنی ئایکلۆد و کارکردنی سیمکارت بە کاملی.", p: "75,000 IQD", tm: "1-7 ڕۆژ" }
+    ];
+
+    // زیادکردنی بەشەکان تا دەبێتە ٥٠
+    for(let i=5; i<=50; i++) {
+        services.push({
+            t: `خزمەتگوزاری ${i}`,
+            i: "settings",
+            s: "زانیاری سەرەتایی لێرەیە...",
+            f: "ئەمە وردەکاری کاملە کە تەنها دوای کڕینی کلیل دەتوانی بیبینیت.",
+            p: "25,000 IQD",
+            tm: "1-5 ڕۆژ"
         });
     }
 
     function render() {
-        const g = document.getElementById('main-grid');
-        data.forEach((item, idx) => {
-            g.innerHTML += `<div class="card" onclick="openM(${idx})"><img src="https://img.icons8.com/color/96/${item.i}.png"><h3>${item.t}</h3></div>`;
+        const grid = document.getElementById('main-grid');
+        services.forEach((s, idx) => {
+            grid.innerHTML += `
+                <div class="card" onclick="openM(${idx})">
+                    <img src="https://img.icons8.com/color/96/${s.i}.png">
+                    <h3>${s.t}</h3>
+                </div>`;
         });
     }
 
     function openM(idx) {
-        const item = data[idx];
-        window.current = item;
+        const item = services[idx];
+        window.currentSection = item;
         document.getElementById('m-title').innerText = item.t;
         document.getElementById('m-short').innerText = item.s;
+        
+        // هەر جارێک دای دەخات، دەبێت کلیلەکە دووبارە لێ بداتەوە
         document.getElementById('vip-zone').style.display = 'none';
         document.getElementById('lock-zone').style.display = 'block';
+        document.getElementById('key-field').value = "";
+        
         document.getElementById('v-modal').style.display = 'block';
     }
 
@@ -126,14 +150,19 @@
         if(validKeys.includes(k)) {
             document.getElementById('lock-zone').style.display = 'none';
             document.getElementById('vip-zone').style.display = 'block';
-            document.getElementById('m-full').innerText = window.current.f;
-            document.getElementById('m-time').innerText = window.current.tm;
-            document.getElementById('m-price').innerText = window.current.p;
-            document.getElementById('wa-link').href = `https://wa.me/9647509395657?text=داواکاری:${window.current.t}_کلیل:${k}`;
-        } else { alert("❌ کلیل هەڵەیە!"); }
+            document.getElementById('m-full').innerText = window.currentSection.f;
+            document.getElementById('m-time').innerText = window.currentSection.tm;
+            document.getElementById('m-price').innerText = window.currentSection.p;
+            document.getElementById('wa-link').href = `https://wa.me/9647509395657?text=داواکاری:${window.currentSection.t}_کلیل:${k}`;
+        } else {
+            alert("❌ کلیلەکە هەڵەیە! تکایە کلیلێکی کارا بنووسە.");
+        }
     }
 
-    function closeModal() { document.getElementById('v-modal').style.display = 'none'; }
+    function closeModal() {
+        document.getElementById('v-modal').style.display = 'none';
+    }
+
     render();
 </script>
 </body>
