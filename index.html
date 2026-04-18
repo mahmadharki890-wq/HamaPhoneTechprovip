@@ -3,184 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hama Herki LED VIP</title>
+    <title>HAMA HERKI VIP 50 SECTIONS</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@700&display=swap');
         
-        body { 
-            background: #000; color: #fff; 
-            font-family: 'Noto Sans Arabic', sans-serif; 
-            margin: 0; padding-bottom: 50px;
-            overflow-x: hidden;
-        }
+        body { background: #000; color: #fff; font-family: 'Noto Sans Arabic', sans-serif; margin: 0; padding-bottom: 50px; overflow-x: hidden; }
 
-        /* تابلۆی لیدی ناوەکەت */
+        /* تابلۆی لیدی حەمە هەرکی */
         .marquee-container {
-            background: #050505; border-bottom: 3px solid #333;
-            padding: 15px 0; overflow: hidden; white-space: nowrap;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+            background: #050505; border-bottom: 3px solid #ff0000; padding: 15px 0; overflow: hidden; white-space: nowrap; box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
-
         .marquee-text {
-            display: inline-block; font-size: 45px; font-weight: bold;
-            color: #ff0000; text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
-            animation: marquee 15s linear infinite;
+            display: inline-block; font-size: 40px; font-weight: bold; color: #ff0000; text-shadow: 0 0 10px #ff0000; animation: marquee 15s linear infinite;
         }
-
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* لیدی ڕەنگاوڕەنگ بۆ بەشەکان */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; }
-
+        /* لیدی ڕەنگاوڕەنگ بۆ ٥٠ بەشەکە */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
         .card {
-            background: #0a0a0a; border-radius: 15px; padding: 20px; 
-            text-align: center; cursor: pointer; position: relative;
-            z-index: 1; border: 2px solid transparent; overflow: hidden;
+            background: #0a0a0a; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; position: relative; z-index: 1; border: 2px solid transparent; overflow: hidden;
         }
-
         .card::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
             animation: rotate-led 4s linear infinite; z-index: -2;
         }
-
         .card::after { content: ''; position: absolute; inset: 3px; background: #0a0a0a; border-radius: 12px; z-index: -1; }
-
         @keyframes rotate-led { 100% { transform: rotate(360deg); } }
-
-        .card img { width: 50px; margin-bottom: 10px; }
-        .card h3 { font-size: 14px; margin: 0; color: #fff; }
+        .card img { width: 45px; margin-bottom: 8px; }
+        .card h3 { font-size: 13px; margin: 0; color: #fff; }
 
         /* مۆدێڵی VIP */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 999; padding: 20px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 999; padding: 20px; overflow-y: auto; }
         .modal-content { 
-            max-width: 400px; margin: 40px auto; background: #000; 
-            padding: 25px; border-radius: 20px; border: 2px solid #ff0000;
-            box-shadow: 0 0 40px #ff0000; text-align: center;
+            max-width: 400px; margin: 20px auto; background: #000; padding: 25px; border-radius: 20px; border: 2px solid #ff0000; box-shadow: 0 0 40px #ff0000; text-align: center;
         }
 
-        /* بەشە شاردراوەکان */
-        .public-part { padding-bottom: 15px; border-bottom: 1px solid #222; }
-        .lock-part { padding: 20px 0; }
-        .secret-part { display: none; animation: openIn 0.5s ease forwards; }
+        .public-info { padding-bottom: 15px; border-bottom: 1px solid #222; }
+        .lock-box { padding: 20px 0; }
+        .secret-info { display: none; animation: fadeIn 0.5s ease; border-top: 1px solid #333; padding-top: 15px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes openIn { from { opacity: 0; transform: translateY(10)px; } to { opacity: 1; transform: translateY(0); } }
-
-        input { 
-            width: 100%; padding: 14px; background: #111; border: 1px solid #444; 
-            color: #ff0000; text-align: center; margin: 15px 0; border-radius: 10px;
-            font-size: 18px; font-weight: bold; outline: none;
-        }
-
+        input { width: 100%; padding: 14px; background: #111; border: 1px solid #444; color: #ff0000; text-align: center; margin: 15px 0; border-radius: 10px; font-size: 18px; font-weight: bold; }
         .btn { width: 100%; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
-        .btn-unlock { background: linear-gradient(90deg, #ff0000, #800000); color: #fff; box-shadow: 0 0 15px #ff0000; }
+        .btn-unlock { background: #ff0000; color: #fff; box-shadow: 0 0 15px #ff0000; }
         .btn-wa { background: #25D366; color: #fff; text-decoration: none; display: block; margin-top: 15px; }
-
-        #admin-panel { display: none; position: fixed; inset: 0; background: #000; color: #0f0; padding: 30px; z-index: 2000; overflow-y: auto; }
     </style>
 </head>
 <body>
 
 <div class="marquee-container" id="admin-trigger">
-    <div class="marquee-text">
-        حــــــــــەمـــــە هــــــــــەرکـــــــــی - خزمەتگوزارییە پێشکەوتووەکانی مۆبایل - حــــــــــەمـــــە هــــــــــەرکـــــــــی
-    </div>
+    <div class="marquee-text">حــــــــــەمـــــە هــــــــــەرکـــــــــی - ٥٠ بەشی VIP - حــــــــــەمـــــە هــــــــــەرکـــــــــی</div>
 </div>
 
 <div class="grid" id="main-grid"></div>
 
 <div id="v-modal" class="modal">
     <div class="modal-content">
-        <div class="public-part">
-            <h2 id="t" style="color:#ff0000; margin-bottom: 5px;"></h2>
-            <p id="s" style="color:#888; font-size: 14px;"></p>
+        <div class="public-info">
+            <h2 id="m-title" style="color:#ff0000;"></h2>
+            <p id="m-short" style="color:#888; font-size: 14px;"></p>
         </div>
         
-        <div id="lock-part" class="lock-part">
-            <p style="font-size: 13px; color: #aaa;">🔒 ئەم زانیارییە قفڵ کراوە، کلیل لێ بدە</p>
-            <input type="text" id="key-input" placeholder="🔑 KEY بنووسە">
-            <button class="btn btn-unlock" onclick="unlockDetails()">ئۆپن کردنی هەموو زانیارییەکان</button>
+        <div id="lock-zone" class="lock-box">
+            <p style="font-size: 12px; color: #aaa;">🔑 بۆ بینینی نرخ و وردەکاری تەواو کلیل لێ بدە</p>
+            <input type="text" id="key-field" placeholder="HAMA-XXX">
+            <button class="btn btn-unlock" onclick="checkKey()">ئۆپن کردنی هەموو بەشەکان</button>
         </div>
 
-        <div id="secret-part" class="secret-part">
-            <div style="background: rgba(0,255,0,0.1); padding: 10px; border-radius: 10px; margin-bottom: 15px;">
-                <p style="color:#0f0; font-weight: bold; margin: 0;">✅ هەموو بەشەکان کرانەوە</p>
-            </div>
-            <p style="text-align: right;"><b>📖 وردەکاری کامل:</b> <br><span id="f" style="color:#ccc;"></span></p>
-            <p style="text-align: right;"><b>⏱ کاتی پێویست:</b> <span id="tm" style="color:#fffb00;"></span></p>
-            <div id="p" style="font-size: 30px; color:#ff0000; font-weight: bold; margin: 15px 0;"></div>
-            <a href="#" id="wa" class="btn btn-wa">کڕین و پەیوەندی کردن</a>
+        <div id="vip-zone" class="secret-info">
+            <p style="color:#0f0; font-weight: bold;">✅ بە سەرکەوتوویی کرایەوە</p>
+            <p style="text-align: right;"><b>📄 وردەکاری کامل:</b> <br><span id="m-full" style="color:#ccc;"></span></p>
+            <p style="text-align: right;"><b>⏱ کات:</b> <span id="m-time" style="color:#fffb00;"></span></p>
+            <div id="m-price" style="font-size: 28px; color:#ff0000; font-weight: bold; margin: 15px 0;"></div>
+            <a href="#" id="wa-link" class="btn btn-wa">داواکردن لە واتسئەپ</a>
         </div>
         
-        <button onclick="closeModal()" style="margin-top:20px; background:none; border:none; color:#555; cursor:pointer;">✕ گەڕانەوە</button>
+        <button onclick="closeModal()" style="margin-top:20px; background:none; border:none; color:#444; cursor:pointer;">✕ گەڕانەوە</button>
     </div>
 </div>
 
-<div id="admin-panel">
-    <h2>ADMIN: KEYS LIST (1000 KEYS)</h2>
-    <p>PASSWORD: Xapokam10#</p>
-    <div id="keys-display" style="font-family: monospace; font-size: 12px;"></div>
-    <button onclick="document.getElementById('admin-panel').style.display='none'" class="btn" style="background:#333; color:#fff; margin-top:20px;">BACK</button>
-</div>
-
 <script>
-    // دروستکردنی ١٠٠٠ دانە کلیل (HAMA-1 تا HAMA-1000)
+    // دروستکردنی ١٠٠٠ کلیل
     const validKeys = Array.from({length: 1000}, (_, i) => `HAMA-${i + 1}`);
+
+    // لیستی ٥٠ بەشەکە (بۆ ئەوەی کۆدەکە درێژ نەبێت لێرە دانەم ناوە، تەنها شوێنەکەم بۆ داناوی)
+    const data = [];
+    const titles = ["سناپچات پڵەس", "تیکتۆک فێکس", "سناپ SS06", "ئایفۆن Bypass", "هێنانەوەی وێنە", "فەیسبووک Recovery", "ئینستا باند", "سۆفتوێر", "ڕیپۆرت", "پاسۆرد", "دۆلار", "فۆڵۆوەر", "دۆزینەوەی مۆبایل", "هاک", "تۆڕ", "سێرڤەر", "ڕووت", "ئەکاونت", "کۆد شکاندن", "پاراستن"];
     
-    // زیادکردنی ئەو کلیلانەی خۆت داتنابوو
-    validKeys.push("HAMA-10-81RL", "HAMA-100", "HAMA-20");
-
-    const services = [
-        { t: "سناپچات پڵەس", i: "snapchat", s: "چالاککردنی فەرمی بۆ یەک ساڵ.", f: "چالاککردنی سناپچات پڵەس بەبێ پاسۆرد، گەرەنتی نەمانی باند و سڕینەوە بۆ ١٢ مانگ.", p: "15,000 IQD", tm: "1 کاتژمێر" },
-        { t: "تیکتۆک فێکس", i: "tiktok", s: "هێنانەوەی ئەکاونتی باندکراو.", f: "چارەسەری باندی تیکتۆک (Impersonation/Integrity) لە ڕێگەی سێرڤەری فەرمییەوە.", p: "45,000 IQD", tm: "1-7 ڕۆژ" },
-        { t: "سناپچات SS06", i: "snapchat", s: "لادانی باندی ئامێر (Device Ban).", f: "لادانی باندی هەمیشەیی ئامێر بۆ ئەوەی بتوانیت سناپچات بەکاربهێنیتەوە.", p: "50,000 IQD", tm: "1-3 ڕۆژ" },
-        { t: "ئایفۆن Bypass", i: "iphone", s: "کردنەوەی ئایکلۆد بە شەبەکەوە.", f: "تێپەڕاندنی قفڵی ئایکلۆد بۆ هەموو مۆدێلەکان و کارکردنی سیمکارت بە کاملی.", p: "75,000 IQD", tm: "1-7 ڕۆژ" }
-        // دەتوانی لێرە بەشەکانی تر بە هەمان شێوە زیاد بکەیت...
-    ];
-
-    let currentItem = null;
-
-    function render() {
-        const grid = document.getElementById('main-grid');
-        services.forEach((s, idx) => {
-            grid.innerHTML += `<div class="card" onclick="openDetails(${idx})"><img src="https://img.icons8.com/color/96/${s.i}.png"><h3>${s.t}</h3></div>`;
+    // دروستکردنی ٥٠ بەش بە شێوەی ئۆتۆماتیکی (دەتوانی خۆت ناوەکانیان بگۆڕیت)
+    for(let i=1; i<=50; i++) {
+        let name = titles[i-1] || `خزمەتگوزاری ${i}`;
+        data.push({
+            t: name,
+            i: i % 2 === 0 ? "snapchat" : "iphone",
+            s: "زانیاری سەرەتایی دەربارەی ئەم بەشە...",
+            f: "ئەمە وردەکاری کامل و نهێنییە کە تەنها دوای کلیلەکە دەردەکەوێت.",
+            p: `${i * 5},000 IQD`,
+            tm: "١-٣ ڕۆژ"
         });
     }
 
-    function openDetails(idx) {
-        currentItem = services[idx];
-        document.getElementById('t').innerText = currentItem.t;
-        document.getElementById('s').innerText = currentItem.s;
-        document.getElementById('secret-part').style.display = 'none';
-        document.getElementById('lock-part').style.display = 'block';
-        document.getElementById('key-input').value = "";
+    function render() {
+        const g = document.getElementById('main-grid');
+        data.forEach((item, idx) => {
+            g.innerHTML += `<div class="card" onclick="openM(${idx})"><img src="https://img.icons8.com/color/96/${item.i}.png"><h3>${item.t}</h3></div>`;
+        });
+    }
+
+    function openM(idx) {
+        const item = data[idx];
+        window.current = item;
+        document.getElementById('m-title').innerText = item.t;
+        document.getElementById('m-short').innerText = item.s;
+        document.getElementById('vip-zone').style.display = 'none';
+        document.getElementById('lock-zone').style.display = 'block';
         document.getElementById('v-modal').style.display = 'block';
     }
 
-    function unlockDetails() {
-        const val = document.getElementById('key-input').value.trim();
-        if(validKeys.includes(val)) {
-            document.getElementById('lock-part').style.display = 'none';
-            document.getElementById('secret-part').style.display = 'block';
-            document.getElementById('f').innerText = currentItem.f;
-            document.getElementById('tm').innerText = currentItem.tm;
-            document.getElementById('p').innerText = currentItem.p;
-            document.getElementById('wa').href = `https://wa.me/9647509395657?text=داواکاری:${currentItem.t}_کلیل:${val}`;
-        } else { alert("❌ کلیلەکە هەڵەیە یان بەکار هاتووە!"); }
+    function checkKey() {
+        const k = document.getElementById('key-field').value.trim();
+        if(validKeys.includes(k)) {
+            document.getElementById('lock-zone').style.display = 'none';
+            document.getElementById('vip-zone').style.display = 'block';
+            document.getElementById('m-full').innerText = window.current.f;
+            document.getElementById('m-time').innerText = window.current.tm;
+            document.getElementById('m-price').innerText = window.current.p;
+            document.getElementById('wa-link').href = `https://wa.me/9647509395657?text=داواکاری:${window.current.t}_کلیل:${k}`;
+        } else { alert("❌ کلیل هەڵەیە!"); }
     }
 
     function closeModal() { document.getElementById('v-modal').style.display = 'none'; }
-
-    // بەشی ئەدمین بۆ بینینی کلیلەکان
-    let holdTimer;
-    document.getElementById('admin-trigger').addEventListener('touchstart', () => holdTimer = setTimeout(() => {
-        if(prompt("ADMIN PASSWORD:") === "Xapokam10#") {
-            document.getElementById('keys-display').innerHTML = validKeys.slice(0, 100).join(' | ') + "... (1000 Keys Loaded)";
-            document.getElementById('admin-panel').style.display = 'block';
-        }
-    }, 3000));
-    document.getElementById('admin-trigger').addEventListener('touchend', () => clearTimeout(holdTimer));
-
     render();
 </script>
 </body>
