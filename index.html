@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hama Tech VIP Pro</title>
+    <title>Hama Tech Phone VIP Pro</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Orbitron:wght@600&display=swap');
         :root { --gold: #D4AF37; --bg: #050505; }
@@ -48,7 +48,7 @@
         .vip-input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: var(--gold); font-size: 18px; text-align: center; margin-bottom: 15px; border-radius: 8px; box-sizing: border-box; }
         .btn-unlock { width: 100%; padding: 15px; background: var(--gold); color: #000; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
 
-        /* لاپەڕەی زانیارییەکان کە دەکرێتەوە */
+        /* لاپەڕەی تەواوی زانیارییەکان */
         #info-view { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; padding: 20px; overflow-y: auto; text-align: right; }
         .info-card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid var(--gold); margin-top: 20px; }
         .price-tag { font-size: 32px; color: var(--gold); font-weight: bold; text-align: center; margin: 15px 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
@@ -93,16 +93,13 @@
             <p id="v-desc" style="color:#aaa; line-height:1.6;"></p>
         </div>
         <p><b>⏱ کاتی پێویست:</b> <span id="v-time"></span></p>
-        
         <div class="price-tag" id="v-price"></div>
-        
         <div class="refund-box" id="v-refund"></div>
 
         <p style="text-align:center; font-size:12px; color:#666;">بۆ داواکردن یان پرسیار یەکێک لەمانە هەڵبژێرە:</p>
-        
         <div class="contact-btns">
             <a href="#" id="wa-link" class="btn-link btn-wa">واتسئەپ 💬</a>
-            <a href="https://www.snapchat.com/add/mahmadharki890" class="btn-link btn-snap">سناپچات 👻</a>
+            <a href="https://www.snapchat.com/add/ebnharki" class="btn-link btn-snap">سناپچات 👻</a>
         </div>
     </div>
 </div>
@@ -122,10 +119,10 @@
     }
 
     const services = [
-        { t: "سناپچات پڵەس", i: "snapchat", p: 15000, time: "١ کاتژمێر", d: "چالاککردنی سناپچات پڵەس بۆ ماوەی یەک ساڵ بەبێ ئەوەی پێویست بە پاسۆرد بکات. گەرەنتی نەمانی باند و سڕینەوە." },
-        { t: "تیکتۆک فێکس", i: "tiktok", p: 45000, time: "١-٧ ڕۆژ", d: "هێنانەوەی ئەو ئەکاونتانەی تیکتۆک کە بەهۆی impersonation یان هەر هۆکارێکی تر باند کراون." },
-        { t: "سناپچات SS06", i: "snapchat", p: 50000, time: "١-٧ ڕۆژ", d: "لادانی باندی ئامێر (Device Ban) کە ڕێگەت پێنادات بچیتە ناو هیچ ئەکاونتێک لە مۆبایلەکەتدا." },
-        { t: "ئایفۆن Bypass", i: "iphone", p: 75000, time: "١-٧ ڕۆژ", d: "کردنەوەی ئایکلۆدی ئایفۆن و تێپەڕاندنی شاشەی ئاکتیڤەیشن بە کارکردنی شەبەکە و سیمکارت." }
+        { t: "سناپچات پڵەس", i: "snapchat", p: 15000, time: "١ کاتژمێر", d: "چالاککردنی فەرمی بۆ ماوەی یەک ساڵ بەبێ پاسۆرد." },
+        { t: "تیکتۆک فێکس", i: "tiktok", p: 45000, time: "١-٧ ڕۆژ", d: "هێنانەوەی ئەکاونتی تیکتۆک کە باند کراوە." },
+        { t: "سناپچات SS06", i: "snapchat", p: 50000, time: "١-٧ ڕۆژ", d: "لادانی باندی ئامێر (Device Ban)." },
+        { t: "ئایفۆن Bypass", i: "iphone", p: 75000, time: "١-٧ ڕۆژ", d: "تێپەڕاندنی ئایکلۆدی ئایفۆن بە سیمکارتەوە." }
     ];
 
     const clrs = ["#ff0000", "#00ff00", "#0000ff", "#ffff00"];
@@ -163,7 +160,7 @@
         document.getElementById('v-price').innerText = activeS.p.toLocaleString() + " IQD";
         
         let rM = activeType === "100" ? "🛡️ گەرەنتی ١٠٠٪ پارە گەڕانەوە" : `🎁 داشکاندنی ${activeType}% بۆ کاتی سەرنەگرتن`;
-        document.getElementById('v-refund').innerText = rM + " (ئەگەر کارەکە بە هیچ شێوەیەک سەرنەگرت ٪٢ دەبڕدرێت).";
+        document.getElementById('v-refund').innerText = rM + " (ئەگەر سەرنەگرت ٪٢ دەبڕدرێت).";
 
         const msg = `🚀 *داواکاری VIP*%0A📌 *بەش:* ${activeS.t}%0A🔑 *کلیل:* ${activeKV}%0A💰 *نرخ:* ${activeS.p.toLocaleString()} IQD`;
         document.getElementById('wa-link').href = `https://wa.me/9647509395657?text=${msg}`;
